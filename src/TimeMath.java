@@ -1,16 +1,12 @@
-package src;
-
 public class TimeMath {
-
-    private static String time = "9:13 AM";
-    private static String minutes = "200";
-
-
 
     public static void main(String[] args) {
         // when done accept args here and throw exception if arks.count != 2
-//        String time = args[0];
-//        String minutes = args[0];
+        if (args.length != 2) {
+            throw new IllegalArgumentException("You have passed in the wrong mumber of arguments, it is possible you did not use quotes around your time.\nPlease use the format: TimeMath \"[H]H:MM {AM|PM}\" <minutesToAdd>");
+        }
+        String time = args[0];
+        String minutes = args[1];
         System.out.println("Adding " + minutes + " to " + time);
         Chronos timeUtil = new Chronos(time);
         timeUtil.addMinutes(minutes);

@@ -36,8 +36,6 @@ public class Chronos {
             hours = hours + 12;
         }
 
-        System.out.println("24: " + hours + ":" + minutes);
-
         // sum all to minutes
         int newMinutes = hours * 60 + minutes;
         minutes = newMinutes % 60;
@@ -48,6 +46,8 @@ public class Chronos {
         if (hours >= 12) {
             meridiem = "PM";
             hours = hours - 12;
+        } else {
+            meridiem = "AM";
         }
         if (hours == 0) {
             hours = 12;
@@ -73,26 +73,20 @@ public class Chronos {
         String hourSegment = dateString.substring(0,idxColon);
         String minuteSegment = dateString.substring(idxColon + 1, idxSpace);
         meridiem = dateString.substring(idxSpace + 1).toUpperCase();
-//        System.out.println(hourSegment);
-//        System.out.println(minuteSegment);
-//        System.out.println(meridiem);
 
         hours = parseIntWithMsg(hourSegment, "Hours must be represented as an integer 1 thru 12");
         if (hours < 1 || hours > 12) {
             throw new IllegalArgumentException("Hours must be represented as an integer 1 thru 12");
         }
-        System.out.println(hours);
 
         minutes = parseIntWithMsg(minuteSegment, "Minutes must be represented as string integer '00' thru '59'");
         if (minutes < 0 || minutes > 59) {
             throw new IllegalArgumentException("Hours must be represented as an integer 1 thru 12");
         }
-        System.out.println(minutes);
 
         if (!(meridiem.equals("AM") || meridiem.equals("PM"))) {
             throw new IllegalArgumentException("The meridiem must be represented with 'AM' or 'PM'");
         }
-        System.out.println(meridiem);
     }
 
     private int parseIntWithMsg(String intString, String errorMessage) {
